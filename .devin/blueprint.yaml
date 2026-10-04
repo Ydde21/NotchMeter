@@ -1,0 +1,21 @@
+runs-on: macos
+# One-time setup.
+initialize: |
+  brew install gitleaks
+# No external dependencies — plain SwiftPM.
+maintenance: |
+  true
+knowledge:
+  - name: build
+    contents: |
+      swift build           # debug
+      swift build -c release
+  - name: run
+    contents: |
+      swift run NotchMeter          # real provider credentials
+      swift run NotchMeter --demo   # forced demo data
+      make bundle                   # release .app, ad-hoc signed
+  - name: notes
+    contents: |
+      Panel renders at top-center of NSScreen.main even without a notch. Requires macOS 14+.
+      Run `gitleaks git .` before publishing history anywhere.
